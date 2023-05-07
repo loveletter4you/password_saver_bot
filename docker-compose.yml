@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  db:
+      image: postgres:14.2
+      restart: always
+      environment:
+            POSTGRES_USER: ${DB_ROOT}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_NAME}
+      volumes:
+            - ./data:/var/lib/postgresql/data
+      ports:
+            - 5432:5432
+  bot:
+    build:
+      context: ./bot
+      dockerfile: ./Dockerfile
+    working_dir: /bot
+    restart: always
+    command: bash -c 'while !</dev/tcp/db/5432; do sleep 1; done; python main.py'
+    depends_on:
+      - db

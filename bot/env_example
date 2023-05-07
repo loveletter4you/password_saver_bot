@@ -1,0 +1,8 @@
+DB_HOST = "db:5432"
+DB_ROOT = "postgres"
+DB_PASSWORD = "postgres"
+DB_NAME = "postgres"
+
+TG_TOKEN = "your_token"
+
+CIPHER_KEY = "your_cipher"
